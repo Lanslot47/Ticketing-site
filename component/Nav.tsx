@@ -1,39 +1,22 @@
-import Link from "next/link"
-import { BiMovie, BiSearch } from "react-icons/bi"
-import { CgProfile } from "react-icons/cg"
-const NavBar = () => {
-    const lists = [
-        { id: 1, title: "Movies", url: "/movies" },
-        { id: 2, title: "News", url: "/news" },
-        { id: 3, title: "Tv Series", url: "/series" },
-        { id: 4, title: "Genre", url: "/genre" },
-    ]
+import { Film } from "lucide-react";
+import Link from "next/link";
+const Nav = () => {
     return (
-        <nav className="flex justify-between items-center w-full p-6 fixed top-0 z-50 bg-black text-white">
-            <div className="">
-            <h1 className="items-center flex gap-1 font-sans cursor-pointer text-amber-400 font-extrabold bg-">
-                <BiMovie size={20} />
-                A Booking
-            </h1>
-            </div>
-            <ul className="hidden md:flex justify-center  gap-6 ">
-                {
-                    lists.map(items => (
-                        <Link href={items.url} key={items.id} className="cursor-pointer hover:underline hover:underline-offset-8">
-                            {items.title}
-                        </Link>
-                    ))
-                }
-                <div className="flex border p-1 h-7 gap-2 font-sans rounded-md text-gray-500 bg-white">
-                    <BiSearch size={20} className="cursor-pointer ml-2 font-bold"/>
-                    <input type="text" placeholder="Search Movies or theatres" className="outline-none text-sm" />
-                </div>
-            </ul>
+        <nav className="flex justify-between px-6 py-6 fixed w-full z-50 top-0  bg-[#0B1221] shadow-md shadow-gray-600">
+            <h1 className="text-xl text-blue-400 font-semibold font-sans flex items-center gap-2">
+                <Film className="h-12 w-12 text-indigo-600 mr-3" />
+                <span>CineTicket</span>
 
-            <div>
-                <CgProfile size={30} className="cursor-pointer" />
+            </h1>
+            <div className="space-x-6 text-sm ">
+                <button className="hover:text-indigo-600 text-white cursor-pointer font-semibold">
+                    <Link href="./Login">Login</Link>
+                </button>
+                <button className="bg-indigo-600 hover:bg-indigo-700 px-6 py-2 rounded-md font-semibold font-sans text-white cursor-pointer hover:transform hover:-translate-0.5  hover:duration-75 ">
+                    <Link href="./Signup">Signup</Link>
+                </button>
             </div>
         </nav>
     )
 }
-export default NavBar
+export default Nav
