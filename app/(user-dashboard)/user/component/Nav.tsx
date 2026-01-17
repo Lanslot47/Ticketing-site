@@ -8,7 +8,7 @@ import Link from "next/link";
 import { User } from "@supabase/supabase-js";
 import { supabase } from "@/app/lib/supabaseClient";
 const Navbar = () => {
-    const [user, setUser] = useState<any>(null)
+    const [user, setUser] = useState<User | null>(null)
     const [showDropDown, setShowDropDown] = useState(false)
     useEffect(() => {
         const getUser = async () => {

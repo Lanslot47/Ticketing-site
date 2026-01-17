@@ -25,6 +25,9 @@ const Hero = () => {
       if (data?.user) {
         setUser(data.user)
       }
+      if(error){
+        console.error(error)
+      }
     }
 
     const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;
@@ -118,13 +121,13 @@ const Hero = () => {
           <p className="font-sm text-gray-500 mb-3">based on popular movies</p>
 
           <div className="grid grid-cols-2 gap-4">
-            {movies.map((movie: any) => {
+            {movies.map((movie: Movie) => {
               const poster = movie.poster_path
                 ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
                 : "/no-image.png"; 
 
               return (
-                <Link  key={movie.id} href={`user/book/${movie.title}`} className="bg-gray-900 rounded-md overflow-hidden">
+                <Link  key={movie.id} href={`/user/book/${movie.title}`} className="bg-gray-900 rounded-md overflow-hidden">
                   <img
                     src={poster}
                     alt={movie.title}

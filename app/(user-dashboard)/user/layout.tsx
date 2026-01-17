@@ -29,13 +29,13 @@ export default function RootLayout({
 
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
                 <div className="flex flex-col md:flex-row overflow-x-hidden bg-black">
-                    {/* <AuthGuard> */}
+                    <AuthGuard>
                         <Sidebar />
                         <div className="flex-1 md:ml-64">
                             <Navbar />
                             <main className="p-4 md:p-6">{children}</main>
                         </div>
-                    {/* </AuthGuard> */}
+                    </AuthGuard>
                 </div>
             </body>
         </html>

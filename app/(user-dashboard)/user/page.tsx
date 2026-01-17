@@ -5,7 +5,7 @@ import Hero from "./component/Hero";
 
 const Home = () => {
     return (
-        // <AuthGuard>
+        <AuthGuard>
             <>
 
                 <div className="max-w-[1400px] mx-auto">
@@ -15,7 +15,7 @@ const Home = () => {
                     </div>
                 </div>
             </>
-        // </AuthGuard>
+        </AuthGuard>
     );
 };
 
