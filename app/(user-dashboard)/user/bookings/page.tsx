@@ -38,8 +38,8 @@ const Booking = () => {
         console.error(error);
       } else {
         const now = new Date();
-        const upcoming = data.filter((b: any) => new Date(b.date) >= now);
-        const past = data.filter((b: any) => new Date(b.date) < now);
+        const upcoming = data.filter((b: Booking) => new Date(b.date) >= now);
+        const past = data.filter((b: Booking) => new Date(b.date) < now);
         setUpcomingBookings(upcoming);
         setPastBookings(past);
       }

@@ -65,7 +65,7 @@ const Hero = () => {
         <h1 className="text-white font-bold text-4xl font-sans mb-3">Welcome back, {user.user_metadata.full_name || user.email}</h1>
       ) : (<p>Loading ...</p>)}
       <p className="text-gray-500 font-sans mb-6">
-        Here's what's happening with your movie tickets
+        Here is what is happening with your movie tickets
       </p>
 
       <div className="grid grid-cols-4 gap-4 mb-6">
