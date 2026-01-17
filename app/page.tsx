@@ -1,6 +1,6 @@
 import Nav from "@/component/Nav";
 import Hero from "@/component/Hero";
-export default function page() {
+ function page() {
   return (
     <div className="">
       <Nav />
@@ -8,3 +8,4 @@ export default function page() {
     </div>
   );
 }
+export default page

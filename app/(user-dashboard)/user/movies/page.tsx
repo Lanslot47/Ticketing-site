@@ -43,7 +43,7 @@ const Movie = () => {
     }, 400);
 
     return () => clearTimeout(timeout);
-  }, [query]);
+  }, [query, apiKey]);
 
   return (
     <div className="min-h-screen bg-black p-10">

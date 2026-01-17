@@ -49,7 +49,7 @@ export default function Signup() {
       setToast({ type: "error", message: error.message });
       return;
     }
-
+ console.log(data)
     setToast({ type: "success", message: "Account created successfully! Redirecting..." });
 
     setTimeout(() => {

@@ -4,45 +4,45 @@ import { Calendar, Timer } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import { supabase } from "@/app/lib/supabaseClient";
-type Booking = {
-    id: string,
-    user_id: string,
-    title: string,
-    seat_number: string,
-    status: string,
-    created_at: string
+// type Booking = {
+//   id: string,
+//   user_id: string,
+//   title: string,
+//   seat_number: string,
+//   status: string,
+//   created_at: string
 
-}
+// }
 const Book = () => {
   const params = useParams();
   const movieTitle = params.movieTitle as string;
   const decodedTitle = decodeURIComponent(movieTitle);
   const [date, setDate] = useState("");
-  const [loading, setLoading] = useState(false)
+  // const [loading, setLoading] = useState(false)
   const [time, setTime] = useState("");
   const [theater, setTheater] = useState("");
   const [seat, setSeat] = useState("");
 
-  async function handleBooking(){
-     setLoading(true)
-    const {data:existing} = await supabase.from('tickets').select('*').eq('title', decodedTitle).eq('seat_number', seat)
+  async function handleBooking() {
+    // setLoading(true)
+    const { data: existing } = await supabase.from('tickets').select('*').eq('title', decodedTitle).eq('seat_number', seat)
     if (existing && existing.length > 0) {
       alert('Sorry, this seat is already booked');
-                  setLoading(false)
-            return
+      // setLoading(false)
+      return
     }
-     const {error} = await supabase.from('tickets').insert([{
-                title: decodedTitle,
-                seat_number: seat,
-                status: 'booked',
-                theater: theater
-            }, ])
-            if (error) {
-            alert('Error booking seat')
-            
-        }
-        else alert('Seat booked successfully')
-             setLoading(false)
+    const { error } = await supabase.from('tickets').insert([{
+      title: decodedTitle,
+      seat_number: seat,
+      status: 'booked',
+      theater: theater
+    },])
+    if (error) {
+      alert('Error booking seat')
+
+    }
+    else alert('Seat booked successfully')
+    // setLoading(false)
   }
   return (
     <div className="min-h-screen bg-black text-white p-10">
@@ -94,11 +94,10 @@ const Book = () => {
                 <button
                   key={t}
                   onClick={() => setTime(t)}
-                  className={`border rounded-lg py-3 ${
-                    time === t
+                  className={`border rounded-lg py-3 ${time === t
                       ? "bg-red-700 border-red-700"
                       : "border-gray-700"
-                  }`}
+                    }`}
                 >
                   {t}
                 </button>
@@ -112,11 +111,10 @@ const Book = () => {
               <button
                 key={t}
                 onClick={() => setTheater(t)}
-                className={`border rounded-lg py-3 ${
-                  theater === t
+                className={`border rounded-lg py-3 ${theater === t
                     ? "bg-red-700 border-red-700"
                     : "border-gray-700"
-                }`}
+                  }`}
               >
                 {t}
               </button>

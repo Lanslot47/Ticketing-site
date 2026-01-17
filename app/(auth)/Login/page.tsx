@@ -26,6 +26,7 @@ const Login = () => {
       setToast({ type: "error", message: error.message });
       return;
     }
+      console.log(data)
     setToast({ type: "success", message: "Account Login successfully! Redirecting..." });
     setTimeout(() => {
       setIsLoading(false);

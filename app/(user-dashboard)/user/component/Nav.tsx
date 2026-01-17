@@ -16,6 +16,7 @@ const Navbar = () => {
             if (data?.user) {
                 setUser(data.user)
             }
+            console.error(error)
         }
             getUser()
         }, []);

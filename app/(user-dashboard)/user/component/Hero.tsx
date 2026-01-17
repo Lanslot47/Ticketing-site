@@ -5,6 +5,7 @@ import { CiLocationOn } from "react-icons/ci";
 import { supabase } from "@/app/lib/supabaseClient";
 import { User } from "@supabase/supabase-js";
 import Link from "next/link";
+import Image from "next/image";
 
 const Hero = () => {
   interface Movie {
@@ -128,7 +129,7 @@ const Hero = () => {
 
               return (
                 <Link  key={movie.id} href={`/user/book/${movie.title}`} className="bg-gray-900 rounded-md overflow-hidden">
-                  <img
+                  <Image
                     src={poster}
                     alt={movie.title}
                     className="w-full h-48 object-cover"
