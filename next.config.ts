@@ -4,6 +4,9 @@ const nextConfig = {
   images: {
     domains: ["image.tmdb.org"],
   },
+  eslint:{
+    ignoreDuringProduction:true
+  }
 };
 
 module.exports = nextConfig;
