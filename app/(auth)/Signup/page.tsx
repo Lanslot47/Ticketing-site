@@ -80,7 +80,6 @@ export default function Signup() {
         <div className="bg-white/70 backdrop-blur-md shadow-lg rounded-2xl border border-gray-200">
           <div className="p-6 space-y-6">
             <form onSubmit={handleSubmit} className="space-y-4">
-              {/* Full Name */}
               <div className="space-y-2">
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                   Full Name
@@ -95,8 +94,6 @@ export default function Signup() {
                   className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50"
                 />
               </div>
-
-              {/* Email */}
               <div className="space-y-2">
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                   Email
@@ -111,8 +108,6 @@ export default function Signup() {
                   className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50"
                 />
               </div>
-
-              {/* Password */}
               <div className="space-y-2">
                 <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                   Password
@@ -127,8 +122,6 @@ export default function Signup() {
                   className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50"
                 />
               </div>
-
-              {/* Confirm Password */}
               <div className="space-y-2">
                 <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
                   Confirm Password

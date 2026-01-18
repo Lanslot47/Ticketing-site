@@ -46,29 +46,32 @@ const Movie = () => {
   }, [query, apiKey]);
 
   return (
-    <div className="min-h-screen bg-black p-10">
-      <h1 className="text-white text-3xl font-bold mb-2">Now Playing</h1>
-      <p className="text-gray-500 mb-8">
+    <div className="min-h-screen bg-black px-4 sm:px-8 py-6">
+      <h1 className="text-white text-2xl sm:text-3xl font-bold mb-2">
+        Now Playing
+      </h1>
+      <p className="text-gray-500 mb-6">
         Book tickets for the latest movies
       </p>
-      <div className="flex items-center gap-3 px-5 py-3 border border-gray-800 rounded-md text-gray-300 mb-8">
-        <Search />
+      <div className="flex items-center gap-3 px-4 py-3 border border-gray-800 rounded-md text-gray-300 mb-6">
+        <Search size={18} />
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search movies..."
-          className="w-full bg-transparent border-0 outline-none text-sm font-semibold text-gray-300"
+          className="w-full bg-transparent outline-none text-sm font-medium text-gray-300"
         />
       </div>
 
       {loading && <p className="text-gray-400 mb-4">Searching...</p>}
 
       {!loading && query && movies.length === 0 && (
-        <p className="text-white text-center mt-10">No movies found!</p>
+        <p className="text-white text-center mt-10">
+          No movies found!
+        </p>
       )}
-
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
         {movies.map((movie) => {
           const poster = movie.poster_path
             ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
@@ -77,20 +80,25 @@ const Movie = () => {
           return (
             <div
               key={movie.id}
-              className="bg-gray-900 rounded-xl overflow-hidden cursor-pointer hover:scale-105 transition"
+              className="bg-gray-900 rounded-xl overflow-hidden transition md:hover:scale-105"
             >
               <Image
                 src={poster}
                 alt={movie.title}
                 width={500}
                 height={750}
-                className="w-full h-64 object-cover"
+                className="w-full h-52 sm:h-60 object-cover"
               />
+
               <div className="p-4">
-                <h2 className="text-white font-semibold mb-3">{movie.title}</h2>
+                <h2 className="text-white font-semibold text-sm mb-3 line-clamp-2">
+                  {movie.title}
+                </h2>
                 <button
-                  onClick={() => router.push(`/user/book/${movie.title}`)}
-                  className="w-full bg-red-700 text-white py-2 rounded-lg"
+                  onClick={() =>
+                    router.push(`/user/book/${movie.title}`)
+                  }
+                  className="w-full bg-red-700 text-white py-2 rounded-lg text-sm font-semibold"
                 >
                   Book Ticket
                 </button>
