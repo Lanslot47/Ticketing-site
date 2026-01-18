@@ -10,7 +10,7 @@ const AuthGuard = ({ children }: { children: React.ReactNode }) => {
             try {
                 const { data: { session }, error } = await supabase.auth.getSession();
                 if (!session) {
-                    router.replace('../auth/Login');
+                    router.replace('../Login');
                     console.error(error)
                 }
                 
