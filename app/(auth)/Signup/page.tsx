@@ -53,7 +53,7 @@ export default function Signup() {
     setToast({ type: "success", message: "Account created successfully! Redirecting..." });
 
     setTimeout(() => {
-      router.push("/dashboard");
+      router.push("/user");
     }, 1500);
   };
 
