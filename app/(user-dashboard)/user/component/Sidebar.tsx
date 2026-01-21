@@ -12,7 +12,7 @@ const Sidebar = () => {
         { id: 1, url: "../user", title: "Dashboard", icon: <Home /> },
         { id: 2, url: "../user/movies", title: "Movies", icon: <Film /> },
         { id: 3, url: "../user/bookings", title: "Bookings", icon: <TbBrandBooking /> },
-        { id: 4, url: "../user/profile", title: "Profile", icon: <GiRamProfile /> },
+        // { id: 4, url: "../user/profile", title: "Profile", icon: <GiRamProfile /> },
     ]
     return (
         <div>

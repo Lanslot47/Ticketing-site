@@ -15,6 +15,7 @@ const Hero = () => {
     overview: string;
     poster_path: string | null;
   }
+const [totalBookings, setTotalBookings] = useState<number>(0);
 
   const [user, setUser] = useState<User | null>(null);
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -43,14 +44,25 @@ const Hero = () => {
       const data = await res.json();
       setUpcoming(data.results.slice(0, 3));
     }
-
+    async function countBookings(){
+      const { data: userData } = await supabase.auth.getUser();
+            const user = userData?.user;
+      const {count, error}= await supabase.from("tickets").select("*", {count:"exact", head: true}).eq("user_id", user?.id)
+           if (error) {
+            console.log(error)
+            return(0)
+           }
+          setTotalBookings(count ?? 0)
+            
+    }
     getUser();
+    countBookings()
     loadPopular();
     loadUpcoming();
   }, []);
 
   const books = [
-    { title: "Total Bookings", num: 24, cont: "+3 this month", icon: <Film className="text-red-600" /> },
+    { title: "Total Bookings", num: totalBookings, cont: "+3 this month", icon: <Film className="text-red-600" /> },
     { title: "Upcoming Shows", num: 2, cont: "Next show in 3 days", icon: <Film className="text-red-600" /> },
     { title: "Favorite Genre", num: "Sci-Fi", cont: "12 movies watched", icon: <Film className="text-yellow-600" /> },
     { title: "Watch Time", num: "48hr", cont: "This year", icon: <Film className="text-yellow-600" /> },
@@ -60,7 +72,7 @@ const Hero = () => {
     <div className="mt-10 px-4 sm:px-6">
       {user ? (
         <h1 className="text-white font-bold text-2xl sm:text-3xl lg:text-4xl mb-3">
-          Welcome back, {user.user_metadata.full_name || user.email}
+          Welcome back, {user.user_metadata.username || user.email}
         </h1>
       ) : (
         <p className="text-gray-400">Loading ...</p>

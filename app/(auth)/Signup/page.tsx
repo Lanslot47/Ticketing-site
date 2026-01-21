@@ -39,7 +39,7 @@ export default function Signup() {
       password: formData.password,
       options: {
         data: {
-          full_name: formData.name,
+          username: formData.name,
         },
       },
     });

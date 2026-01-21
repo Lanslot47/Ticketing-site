@@ -6,13 +6,14 @@ import { Calendar, Timer, Download } from "lucide-react";
 import { CiLocationOn } from "react-icons/ci";
 
 type Booking = {
-  id: number;
+  id: string;
   movie_id: number;
   movie_title: string;
-  date: string; 
-  time: string; 
+  created_at: string;
   theater: string;
-  seat: string;
+  seat_number: string;
+  bookingDate: string;
+  bookingTime: string;
 };
 
 const Booking = () => {
@@ -25,34 +26,47 @@ const Booking = () => {
     const fetchBookings = async () => {
       const { data: userData } = await supabase.auth.getUser();
       const user = userData?.user;
+
       if (!user) {
         setLoading(false);
         return;
       }
 
       const { data, error } = await supabase
-        .from("bookings")
+        .from("tickets")
         .select("*")
         .eq("user_id", user.id)
-        .order("date", { ascending: true });
+        .order("created_at", { ascending: true });
 
-      if (error) {
+      if (error || !data) {
         console.error(error);
         setLoading(false);
         return;
       }
 
       const now = new Date();
-
       const upcoming: Booking[] = [];
       const past: Booking[] = [];
 
-      data.forEach((b: Booking) => {
-        const bookingDateTime = new Date(`${b.date}T${b.time}`);
-        if (bookingDateTime >= now) upcoming.push(b);
-        else past.push(b);
-      });
+      data.forEach((b: any) => {
+        const createdAt = new Date(b.created_at);
 
+        const booking: Booking = {
+          ...b,
+          bookingDate: createdAt.toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+          }),
+          bookingTime: createdAt.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+        };
+
+        if (createdAt >= now) upcoming.push(booking);
+        else past.push(booking);
+      });
       setUpcomingBookings(upcoming);
       setPastBookings(past);
       setLoading(false);
@@ -84,16 +98,17 @@ const Booking = () => {
       <p className="text-gray-500 text-sm mt-1 mb-5">
         Booking ID: BK{booking.id}
       </p>
+
       <div className="space-y-4 text-sm">
         <div className="flex flex-col sm:flex-row sm:justify-between gap-2">
           <div className="flex gap-2 items-center">
             <Calendar className="text-red-600" size={16} />
             <p className="text-gray-400">
-              Date: <span className="text-white">{booking.date}</span>
+              Date: <span className="text-white">{booking.bookingDate}</span>
             </p>
           </div>
           <p className="text-gray-400">
-            Seats: <span className="text-white">{booking.seat}</span>
+            Seats: <span className="text-white">{booking.seat_number}</span>
           </p>
         </div>
 
@@ -101,7 +116,7 @@ const Booking = () => {
           <div className="flex gap-2 items-center">
             <Timer className="text-red-600" size={16} />
             <p className="text-gray-400">
-              Time: <span className="text-white">{booking.time}</span>
+              Time: <span className="text-white">{booking.bookingTime}</span>
             </p>
           </div>
           <p className="text-gray-400">
@@ -116,8 +131,9 @@ const Booking = () => {
               Theater: <span className="text-white">{booking.theater}</span>
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <button className="flex items-center justify-center gap-2 px-5 py-2 bg-red-600 rounded-md text-white text-sm font-semibold">
+
+          <div className="flex gap-3">
+            <button className="flex items-center gap-2 px-5 py-2 bg-red-600 rounded-md text-white text-sm font-semibold">
               <Download size={16} /> Download Ticket
             </button>
             <button className="px-5 py-2 border border-gray-500 rounded-md text-white text-sm font-semibold">
@@ -137,21 +153,6 @@ const Booking = () => {
       <p className="text-gray-500 mb-6">
         View and manage your movie tickets
       </p>
-      <div className="flex gap-2 mb-8">
-        {["upcoming", "past"].map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab as any)}
-            className={`px-5 py-2 rounded-md font-semibold text-sm ${
-              activeTab === tab
-                ? "bg-black text-white"
-                : "bg-gray-700 text-gray-400"
-            }`}
-          >
-            {tab.charAt(0).toUpperCase() + tab.slice(1)}
-          </button>
-        ))}
-      </div>
 
       {activeTab === "upcoming" && upcomingBookings.map(renderBooking)}
       {activeTab === "past" && pastBookings.map(renderBooking)}

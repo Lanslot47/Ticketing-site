@@ -14,7 +14,7 @@ const Nav = () => {
           <Film className="h-8 w-8 text-indigo-600" />
           <span>CineTicket</span>
         </h1>
-        <div className="hidden md:flex space-x-6 text-sm">
+        <div className="hidden md:flex md:items-center space-x-6 text-sm">
           <Link
             href="./Login"
             className="text-white font-semibold hover:text-indigo-600"

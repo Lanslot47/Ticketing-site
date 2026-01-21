@@ -83,7 +83,7 @@ const Hero = () => {
             A new cinematic experience built just for you.
           </p>
 
-          <Link href="./auth/Signup">
+          <Link href="./Signup">
             <button className="bg-indigo-600 px-6 py-3 rounded-lg text-base sm:text-lg font-semibold hover:bg-indigo-500 transition">
               Get Started
             </button>

@@ -20,7 +20,7 @@ const Navbar = () => {
         }
             getUser()
         }, []);
-const firstLetter = user?.user_metadata?.full_name?.[0] || '?'
+const firstLetter = user?.user_metadata?.username?.[0] || '?'
 return (
     <div className="fixed md:static z-40  w-full h-20 border-b border-gray-800 px-4 py-3 items-center">
         <nav className="flex  justify-between gap-6 md:justify-end ">
@@ -28,7 +28,7 @@ return (
             <div onClick={() => setShowDropDown(prev => !prev)}>
                 <div className="hover:bg-blue-50 flex items-center gap-5 mb-3 p-2">
                     <div className="h-7 w-7 rounded-2xl border-0  bg-gray-100">
-                        <h3 className="text-center font-semibold mt-1">I</h3>
+                        <h3 className="text-center font-semibold mt-1">{ firstLetter.toUpperCase()}</h3>
                     </div>
                     <h3 className={`text-sm md:text-base font-semibold text-gray-700 ml-2 truncate hover:bg-blue-50${showDropDown}`}>
                        { firstLetter.toUpperCase()}

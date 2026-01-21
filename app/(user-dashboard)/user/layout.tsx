@@ -25,9 +25,9 @@ export default function RootLayout({
 }>) {
     return (
 
-        <html lang="en">
+        <div>
 
-            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+            <section className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
                 <div className="flex flex-col md:flex-row overflow-x-hidden bg-black">
                     <AuthGuard>
                         <Sidebar />
@@ -37,7 +37,7 @@ export default function RootLayout({
                         </div>
                     </AuthGuard>
                 </div>
-            </body>
-        </html>
+            </section>
+        </div>
     );
 }

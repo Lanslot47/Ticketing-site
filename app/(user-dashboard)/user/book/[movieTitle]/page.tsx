@@ -16,6 +16,7 @@ const Book = () => {
   const [seat, setSeat] = useState("");
 
   async function handleBooking() {
+    const { data: userData } = await supabase.auth.getUser();
     const { data: existing } = await supabase
       .from("tickets")
       .select("*")
@@ -29,6 +30,7 @@ const Book = () => {
 
     const { error } = await supabase.from("tickets").insert([
       {
+        user_id: userData?.user?.id,
         title: decodedTitle,
         seat_number: seat,
         status: "booked",
@@ -87,11 +89,10 @@ const Book = () => {
                 <button
                   key={t}
                   onClick={() => setTime(t)}
-                  className={`border rounded-lg py-2 text-sm ${
-                    time === t
+                  className={`border rounded-lg py-2 text-sm ${time === t
                       ? "bg-red-700 border-red-700"
                       : "border-gray-700"
-                  }`}
+                    }`}
                 >
                   {t}
                 </button>
@@ -105,11 +106,10 @@ const Book = () => {
               <button
                 key={t}
                 onClick={() => setTheater(t)}
-                className={`border rounded-lg py-2 text-sm ${
-                  theater === t
+                className={`border rounded-lg py-2 text-sm ${theater === t
                     ? "bg-red-700 border-red-700"
                     : "border-gray-700"
-                }`}
+                  }`}
               >
                 {t}
               </button>
