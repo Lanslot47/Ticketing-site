@@ -7,7 +7,7 @@ import { CiLocationOn } from "react-icons/ci";
 
 type Booking = {
   id: string;
-  movie_title: string;
+  title: string;
   created_at: string;
   theater: string;
   seat_number: string;
@@ -29,7 +29,7 @@ const Booking = () => {
 
       const { data, error } = await supabase
         .from("tickets")
-        .select("id, movie_title, created_at, theater, seat_number")
+        .select("id, title, created_at, theater, seat_number")
         .eq("user_id", user.id)
         .order("created_at", { ascending: false });
 
@@ -70,7 +70,7 @@ const Booking = () => {
           >
             <div className="flex flex-col sm:flex-row sm:justify-between gap-3">
               <h2 className="text-white font-semibold text-lg sm:text-xl">
-                {booking.movie_title}
+                {booking.title}
               </h2>
 
               <span className="bg-yellow-200 text-yellow-600 px-4 py-1 rounded-full text-sm font-semibold w-fit">
